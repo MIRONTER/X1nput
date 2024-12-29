@@ -90,6 +90,8 @@ namespace X1nputConfigurator
 
             RegistryKey key = Registry.LocalMachine.OpenSubKey(_startupPath);
             if (key.GetValue(_startupValue) != null) AutoLaunch.IsChecked = true;
+
+            RefreshProcesses();
         }
 
         void RefreshProcesses()
@@ -338,6 +340,16 @@ namespace X1nputConfigurator
                 deleteKey.DeleteValue(_startupValue);
                 deleteKey.Close();
             }
+        }
+
+        private void Processes_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            InjectClick(sender, e);
+        }
+
+        private void InjectedProcesses_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            UnloadClick(sender, e);
         }
     }
 }
